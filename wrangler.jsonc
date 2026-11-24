@@ -1,0 +1,20 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "tablero-mesa-ayuda",
+  "account_id": "<CLOUDFLARE_ACCOUNT_ID>",
+  "main": "src/worker.js",
+  "compatibility_date": "2026-10-01",
+  "workers_dev": true,
+  "preview_urls": false,
+  // El Worker corre antes que los archivos estáticos para exigir el login en todo.
+  "assets": { "directory": "./public", "binding": "ASSETS", "run_worker_first": true },
+  "kv_namespaces": [{ "binding": "CACHE", "id": "<KV_NAMESPACE_ID>" }],
+  "vars": {
+    "ODOO_URL": "https://example.odoo.com",
+    // Se llenan al crear la aplicación en Cloudflare Access. Vacíos = el Worker responde 403 a todo.
+    "TEAM_DOMAIN": "<your-team>.cloudflareaccess.com",
+    "ACCESS_AUD": "<ACCESS_APPLICATION_AUD>"
+  },
+  "observability": { "enabled": true }
+  // Secreto (no va aquí): ODOO_API_KEY  ->  npx wrangler secret put ODOO_API_KEY
+}

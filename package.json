@@ -1,0 +1,14 @@
+{
+  "name": "tablero-mesa-ayuda",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Tablero de supervisión de tickets de Mesa de Ayuda (Odoo, equipo 35) servido por un Worker de Cloudflare.",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "d3": "^7.9.0",
+    "wrangler": "^4"
+  }
+}

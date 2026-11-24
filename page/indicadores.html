@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KPI Mesa de Ayuda</title>
+<style>
+  :root { --fg: #1f2933; --muted: #62707d; --line: #d9dee3; --bg: #ffffff; --panel: #f6f8fa; --acc: #01666b; }
+  @media (prefers-color-scheme: dark) { :root { --fg: #e6e9ec; --muted: #9aa5af; --line: #38424b; --bg: #14181c; --panel: #1c2227; --acc: #4fb6bb; } }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 14px/1.45 system-ui, "Segoe UI", sans-serif; }
+  main { max-width: 1180px; margin: 0 auto; padding: 20px 16px 48px; }
+  h1 { font-size: 1.4rem; margin: 0 0 4px; color: var(--acc); }
+  h2 { font-size: 1.05rem; margin: 22px 0 2px; color: var(--acc); border-bottom: 1px solid var(--line); padding-bottom: 4px; }
+  .sub h2 { font-size: .95rem; color: var(--fg); border: 0; }
+  .nota, #periodo, #estado { color: var(--muted); font-size: .85rem; margin: 2px 0 6px; }
+  .barra { display: flex; flex-wrap: wrap; gap: 10px; align-items: end; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 12px; margin: 14px 0 6px; }
+  label { display: flex; flex-direction: column; gap: 3px; font-size: .8rem; color: var(--muted); }
+  input, select, button { font: inherit; padding: 6px 10px; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); color: var(--fg); }
+  button { cursor: pointer; }
+  button.p { background: var(--acc); color: #fff; border-color: var(--acc); }
+  button:disabled { opacity: .5; cursor: wait; }
+  table { border-collapse: collapse; width: 100%; margin: 6px 0; font-variant-numeric: tabular-nums; }
+  th, td { padding: 5px 8px; text-align: left; border-bottom: 1px solid var(--line); }
+  th { font-weight: 600; }
+  .n { text-align: right; }
+  tr.tot td { font-weight: 700; }
+  .tec { break-inside: avoid; }
+  @media print {
+    @page { size: A4 landscape; margin: 12mm; }
+    :root { --fg: #000; --muted: #444; --line: #bbb; --bg: #fff; --panel: #fff; --acc: #01666b; }
+    .noprint { display: none !important; }
+    main { max-width: none; padding: 0; }
+    .tec { break-before: page; }
+    body { font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <h1>KPI Mesa de Ayuda</h1>
+  <div id="periodo"></div>
+  <div class="barra noprint">
+    <label>Desde <input type="date" id="desde"></label>
+    <label>Hasta <input type="date" id="hasta"></label>
+    <label>Técnico <select id="tec"><option value="todos">Todos</option></select></label>
+    <button class="p" id="bgo" type="button">Consultar</button>
+    <button id="bpdf" type="button">Descargar PDF</button>
+    <button id="bxls" type="button">Descargar Excel</button>
+  </div>
+  <div id="estado" class="noprint" role="status"></div>
+  <div id="resultado"></div>
+  <p class="nota noprint">En el cuadro de impresión elija "Guardar como PDF". El Excel trae una hoja por técnico con cada ticket y lo que aporta a cada KPI.</p>
+</main>
+<script src="indicadores.js"></script>
+</body>
+</html>
